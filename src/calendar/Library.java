@@ -34,6 +34,8 @@ public class Library {
 		
 		int diasRestantes= diasTotaisdoMes(mes,ano)-dia; //dias restantes do mês baseado no dia atual, exemplo: dia 2, faltam 28 para 30
 		
+		
+		
 		//System.out.println(diasRestantes);
 		for(int i=mes+1;i<=12;i++) //Começa próximo mês, vai até dezembro e soma todos dias do ano
 		{	
@@ -70,30 +72,51 @@ public class Library {
 		int mesBase= dateUser.getMonthValue(); int mesMeta=targetMonth;
 		int anoBase= dateUser.getYear(); int anoMeta= targetYear;
 		
-		
 		int diasRestantes=0;
 	
-		diasRestantes += diasRestantesAteFimdoAno(diaBase, mesBase, anoBase);
-		
-		if(anoBase!=anoMeta)
+		if(anoBase<=anoMeta) 
 		{
-			//System.out.println("Debug");
-			//System.out.println(diasRestantes);
+			diasRestantes += diasRestantesAteFimdoAno(diaBase, mesBase, anoBase);
 			
-			for(int i=anoBase+1;i<anoMeta;i++)
+			if(anoBase!=anoMeta)
+			{
+				//System.out.println("Debug");
+				//System.out.println(diasRestantes);
+				
+				for(int i=anoBase+1;i<anoMeta;i++)
+				{
+					
+					diasRestantes+= diasTotaisdeUmAno(i);
+					
+				}
+				
+				diasRestantes+= (diasTotaisdeUmAno(anoMeta)-diasRestantesAteFimdoAno(diaMeta, mesMeta, anoMeta));
+			}
+			else
+			{
+				//System.out.println("Debug 2");
+				diasRestantes = diferencaDentroAno(diaBase, mesBase, anoBase, diaMeta, mesMeta, anoMeta);
+			}
+			
+		}else //ano base>ano meta
+		{
+			diasRestantes += (diasTotaisdeUmAno(anoBase)-diasRestantesAteFimdoAno(diaBase, mesBase, anoBase)); //percorrido
+			
+			for(int i=anoBase-1;i>anoMeta;i--)
 			{
 				
 				diasRestantes+= diasTotaisdeUmAno(i);
 				
 			}
 			
-			diasRestantes+= (diasTotaisdeUmAno(anoMeta)-diasRestantesAteFimdoAno(diaMeta, mesMeta, anoMeta));
+			diasRestantes += diasRestantesAteFimdoAno(diaMeta, mesMeta, anoMeta);
+			
+			diasRestantes=diasRestantes*-1;
+			
+			//System.out.println(diasRestantes);
 		}
-		else
-		{
-			//System.out.println("Debug 2");
-			diasRestantes = diferencaDentroAno(diaBase, mesBase, anoBase, diaMeta, mesMeta, anoMeta);
-		}
+		
+		
 		
 		
 		
@@ -104,14 +127,94 @@ public class Library {
 	public static void guessWeek(int diference,int diaAtual,int mesAtual,int anoAtual, int diaMeta,int mesMeta,int anoMeta)
 	{
 		LocalDate dateUser = LocalDate.now();
-		
+		String semanaDiaUser = " ";
+		String semanaDiaTarget = " ";
 		DayOfWeek weekDayUser = dateUser.getDayOfWeek();
+
 		System.out.println(diference);
 		int resto = diference%7;
 		
 		DayOfWeek weekDayTarget = weekDayUser.plus(resto);
 		
-		System.out.printf("Hoje é %d/%d/%d, uma %s\nNo dia meta %d/%d/%d será %s",diaAtual,mesAtual,anoAtual,weekDayUser,diaMeta,mesMeta,anoMeta,weekDayTarget);
+		switch (weekDayUser)
+		{
+		case MONDAY:
+			semanaDiaUser = "Segunda feira";
+			break;
+			
+		case TUESDAY:
+			semanaDiaUser = "Terça feira";
+			break;
+			
+		case WEDNESDAY:
+			semanaDiaUser = "Quarta feira";
+			break;
+			
+		case THURSDAY:
+			semanaDiaUser = "Quinta feira";
+			break;
+			
+		case FRIDAY:
+			semanaDiaUser = "Sexta feira";
+			break;
+			
+		case SATURDAY:
+			semanaDiaUser = "Sábado";
+			break;
+			
+		case SUNDAY:
+			semanaDiaUser = "Domingo";
+			break;
+			default:
+				semanaDiaUser="erro";
+				break;
+		}
+		
+		switch (weekDayTarget)
+		{
+		case MONDAY:
+			semanaDiaTarget = "Segunda feira";
+			break;
+			
+		case TUESDAY:
+			semanaDiaTarget = "Terça feira";
+			break;
+			
+		case WEDNESDAY:
+			semanaDiaTarget = "Quarta feira";
+			break;
+			
+		case THURSDAY:
+			semanaDiaTarget = "Quinta feira";
+			break;
+			
+		case FRIDAY:
+			semanaDiaTarget = "Sexta feira";
+			break;
+			
+		case SATURDAY:
+			semanaDiaTarget= "Sábado";
+			break;
+			
+		case SUNDAY:
+			semanaDiaTarget = "Domingo";
+			break;
+			default:
+				semanaDiaTarget="erro";
+				break;
+		}
+		
+		
+		
+		if(diference<0) //saída texto
+		{
+			System.out.printf("Hoje é %d/%d/%d, uma %s\nNo dia meta %d/%d/%d foi %s",diaAtual,mesAtual,anoAtual,semanaDiaUser,diaMeta,mesMeta,anoMeta,semanaDiaTarget);
+		}
+		else
+		{
+			System.out.printf("Hoje é %d/%d/%d, uma %s\nNo dia meta %d/%d/%d será %s",diaAtual,mesAtual,anoAtual,semanaDiaUser,diaMeta,mesMeta,anoMeta,semanaDiaTarget);
+		}
+			
 			
 	}
 	
