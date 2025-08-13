@@ -62,15 +62,14 @@ javac calendar/*.java
 
 
 🔹 Execução
-Após a compilação, vá para o diretório raiz do projeto (pai da pasta src) e execute:
+- Após a compilação, vá para o diretório raiz do projeto (pai da pasta src) e execute:
 
-bash
-Copiar
-Editar
-java calendar.Main
-Você pode modificar a data alvo na função main para testar diferentes cenários.
+```java calendar.Main```
+
+- Você pode modificar a data alvo na função main para testar diferentes cenários.
 
 🚧 Status do Projeto e Próximos Passos
+
 Status: ✅ Concluído para o cálculo principal.
 
 Próximos Passos:
