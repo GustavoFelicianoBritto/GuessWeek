@@ -131,7 +131,7 @@ public class Library {
 		String semanaDiaTarget = " ";
 		DayOfWeek weekDayUser = dateUser.getDayOfWeek();
 
-		System.out.println(diference);
+		//System.out.println(diference);
 		int resto = diference%7;
 		
 		DayOfWeek weekDayTarget = weekDayUser.plus(resto);
@@ -208,11 +208,11 @@ public class Library {
 		
 		if(diference<0) //saída texto
 		{
-			System.out.printf("Hoje é %d/%d/%d, uma %s\nNo dia meta %d/%d/%d foi %s",diaAtual,mesAtual,anoAtual,semanaDiaUser,diaMeta,mesMeta,anoMeta,semanaDiaTarget);
+			System.out.printf("%d/%d/%d - %s\n",diaMeta,mesMeta,anoMeta,semanaDiaTarget);
 		}
 		else
 		{
-			System.out.printf("Hoje é %d/%d/%d, uma %s\nNo dia meta %d/%d/%d será %s",diaAtual,mesAtual,anoAtual,semanaDiaUser,diaMeta,mesMeta,anoMeta,semanaDiaTarget);
+			System.out.printf("%d/%d/%d - %s\n",diaMeta,mesMeta,anoMeta,semanaDiaTarget);
 		}
 			
 			
